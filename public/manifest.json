@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "What’sThat?",
+  "version": "1.0.0",
+  "description": "Instant answers to what you see.",
+  "permissions": ["activeTab", "scripting", "tabs", "downloads"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_title": "What’sThat?",
+    "default_icon": { "48": "icon.png" }
+  },
+  "icons": { "48": "icon.png" },
+  "commands": {
+    "toggle-sidebar": {
+      "suggested_key": { "default": "Alt+Q", "mac": "Alt+Q" },
+      "description": "Toggle What’sThat? sidebar"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["yt-caption-hook.js"],
+      "matches": ["https://www.youtube.com/*"]
+    }
+  ]
+}
